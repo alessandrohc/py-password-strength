@@ -4,8 +4,15 @@
 import re
 from setuptools import setup, find_packages
 
+version = None
 with open('password_strength/__init__.py', 'r') as f:
-    version = re.search(r'^__version__\s*=\s*['"]([^'"]*)['"]', f.read(), re.MULTILINE).group(1)
+    for line in f:
+        if line.startswith('__version__'):
+            version = line.split('=')[1].strip().strip('\'"')
+            break
+
+if not version:
+    raise RuntimeError('Cannot find version information')
 
 setup(
     name='password_strength',
@@ -30,7 +37,7 @@ setup(
     extras_require={
     },
     include_package_data=True,
-    test_suite='nose.collector',
+    
 
     platforms='any',
     classifiers=[
