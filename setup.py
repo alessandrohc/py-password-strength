@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 """ Password strength and validation """
 
+import re
 from setuptools import setup, find_packages
+
+with open('password_strength/__init__.py', 'r') as f:
+    version = re.search(r'^__version__\s*=\s*['"]([^'"]*)['"]', f.read(), re.MULTILINE).group(1)
 
 setup(
     name='password_strength',
-    version='0.0.3-2',
+    version=version,
     author='Mark Vartanyan',
     author_email='kolypto@gmail.com',
 
